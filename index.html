@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Hùng béo</title>
+    <style>
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .wrong {
+            color: red;
+            font-weight: bold;
+        }
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1><strong>Hùng béo là aii??</strong></h1>
+    <p>Theo các bạn, thằng Hùng béo là ai?</p>
+    <p>Các bạn đã đúng, dưới đây là hình ảnh của nó:</p>
+    <img src="IMG_5044.jpg" alt="Thằng Hùng béo" style="width: 15%; height: auto;">
+    <br>
+    <a href="https://www.facebook.com/profile.php?id=100055471471581">FB của nó đây nha mn!</a>
+    <br>
+    <video src="IMG_5948.mp4" style="height: 20%; width: 20%;" controls>Ngầu chưa?</video>
+    <br>
+    <h2>Câu hỏi trắc nghiệm</h2>
+    <form id="quizForm">
+        <p>Nguyễn Văn Hùng là GAY?</p>
+        <label><input type="radio" name="question1" value="a">A. Đúng</label><br>
+        <label><input type="radio" name="question1" value="b">B. Sai</label><br>
+        <label><input type="radio" name="question1" value="c">C. Đáp án A</label><br>
+        <label><input type="radio" name="question1" value="d">D. Không có đáp án đúng</label><br><br>
+        <input type="button" value="Kiểm tra thôi nào!" onclick="checkAnswer()">
+    </form>
+    <div id="result" class="message"></div>
+
+    <audio id="correctSound" src="correct.mp3"></audio>
+    <audio id="wrongSound" src="wrong.mp3"></audio>
+
+    <script>
+        function checkAnswer() {
+            const form = document.getElementById('quizForm');
+            const selected = form.querySelector('input[name="question1"]:checked');
+            const result = document.getElementById('result');
+            const correctSound = document.getElementById('correctSound');
+            const wrongSound = document.getElementById('wrongSound');
+
+            if (selected) {
+                if (selected.value === 'c' || selected.value === 'a') {
+                    result.textContent = 'Bạn thật giỏi!';
+                    result.classList.add('correct');
+                    result.classList.remove('wrong');
+                    correctSound.play();
+                } else {
+                    result.textContent = 'Chọn lại dùm!';
+                    result.classList.add('wrong');
+                    result.classList.remove('correct');
+                    wrongSound.play();
+                }
+            } else {
+                result.textContent = 'Vui lòng chọn một đáp án!';
+                result.classList.add('wrong');
+                result.classList.remove('correct');
+                wrongSound.play();
+            }
+            result.style.display = 'block';
+
+            setTimeout(() => {
+                form.reset();
+                result.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
